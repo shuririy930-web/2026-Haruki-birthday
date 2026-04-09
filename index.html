@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Noto Serif JP', serif;
+  text-align: center;
+  background: #f7f3eb;
+  color: #4a3b2c;
+}
+
+/* スライドショー */
+
+/* =========================
+   フィルムフレーム（上下黒のみ）
+========================= */
+
+.film-frame {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+
+  margin-bottom: 20px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  background: #111;
+  box-sizing: border-box;
+}
+
+/* =========================
+   上下の黒フレーム
+========================= */
+.film-frame::before,
+.film-frame::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  height: 28px; /* ←太さここで調整 */
+  background: #000;
+
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* 上 */
+.film-frame::before {
+  top: 0;
+}
+
+/* 下 */
+.film-frame::after {
+  bottom: 0;
+}
+
+/* =========================
+   スライド本体
+========================= */
+.slideshow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* 画像 */
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  animation: slideShow 12s infinite;
+}
+
+@keyframes slideShow {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  30% { opacity: 1; }
+  40% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* スライド順番 */
+.slide:nth-child(1) { animation-delay: 0s; }
+.slide:nth-child(2) { animation-delay: 4s; }
+.slide:nth-child(3) { animation-delay: 8s; }
+
+/* セクション */
+
+.section {
+ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+
+/* カード */
+.card {
+  background: rgba(255,255,255,0.7);
+  padding: 30px 20px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  max-width: 400px;
+  width: 100%;
+}
+
+/* 便箋 */
+
+.letter {
+  text-align: left;
+
+  padding: 20px;
+  padding-top: 28px; /* ←ここ調整ポイント */
+
+  line-height: 32px;
+
+  background-image: linear-gradient(#d8cfc3 1px, transparent 1px);
+  background-size: 100% 32px;
+  background-position: 0 28px; /* ←これと揃える */
+}
+
+/* サイン */
+.signature {
+  font-family: 'Great Vibes', cursive;
+  font-size: 28px;
+  position: absolute;
+  right: 14px;
+  bottom: 6px;
+  opacity: 0.9;
+}
+
+/* 名前 */
+.name {
+  font-family: 'Great Vibes', cursive;
+  font-size: 52px;
+  letter-spacing: 2px;
+}
+
+/* 区切り */
+.divider {
+  width: 60px;
+  border: none;
+  border-top: 1px solid #6b4f3b;
+  margin: 15px auto;
+}
+
+
+/* プレゼントボタン */
+
+.gift {
+  width: 120px; /* サイズ調整 */
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.gift:active {
+  transform: scale(0.9);
+}
+
+/* モーダル背景 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* 中身 */
+.modal-content {
+  text-align: center;
+  animation: pop 0.5s ease;
+}
+
+/* チケット画像 */
+.ticket {
+  width: 250px;
+  border-radius: 12px;
+}
+
+.ticket-link {
+  display: inline-block;
+}
+
+/* プレゼント開くアニメ */
+@keyframes pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* スケジュール題名 */
+
+.title-section {
+  padding-bottom: 10px;
+}
+
+.title-section h2 {
+
+font-family: 'Great Vibes', cursive;
+
+  font-size: 40px;
+  letter-spacing: -1px;
+  font-weight: 500;
+}
+
+/* スケジュール表 */
+
+.timeline {
+  margin-top: 20px;
+  position: relative;
+  padding-left: 30px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(107,79,59,0.3);
+}
+
+.event {
+  position: relative;
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.time {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.dot {
+  position: absolute;
+  left: -23px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  background: #6b4f3b;
+  border-radius: 50%;
+}
+
+.highlight .dot {
+  background: gold;
+  transform: scale(1.3);
+}
+
+/* フェード */
+.fade {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s forwards;
+}
+
+.delay1 { animation-delay: 0.5s; }
+.delay2 { animation-delay: 1s; }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="film-frame">
+
+  <div class="slideshow">
+    <img src="https://i.imgur.com/FYu6PbI.jpg" class="slide">
+    <img src="画像2のURL" class="slide">
+    <img src="画像3のURL" class="slide">
+  </div>
+
+</div>
+
+<!-- 1画面目 -->
+<div class="section">
+  <div class="card fade">
+    <div class="name">Haruki</div>
+    <hr class="divider">
+
+    <div class="letter fade delay1">
+      25歳のお誕生日おめでとう！<br>
+      幸せな時間をいつもありがとう<br>
+      ずっと大好きです<br>
+
+      <div class="signature">Shuri</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- スケジュール題名 -->
+
+<div class="section title-section">
+  <h2>《Today's  Schedule》</h2>
+</div>
+
+<!-- スケジュール表 -->
+
+<div class="section">
+  <div class="timeline">
+
+    <div class="event">
+      <div class="time">09:00</div>
+      <div class="dot"></div>
+      <div class="content">起床</div>
+    </div>
+
+    <div class="event">
+      <div class="time">12:00</div>
+      <div class="dot"></div>
+      <div class="content">ランチ</div>
+    </div>
+
+    <div class="event highlight">
+      <div class="time">15:00</div>
+      <div class="dot"></div>
+      <div class="content">
+        <img src="https://i.imgur.com/LWGT8lr.jpg" class="gift" onclick="openGift()">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- モーダル -->
+
+<div id="modal" class="modal" onclick="closeGift(event)">
+
+  <div class="modal-content">
+    <a href="グループ参加のURL" class="ticket-link" target="_blank">
+  <img src="https://i.imgur.com/G70k6VP.jpg" class="ticket">
+</a>
+    <p style="color:white; margin-top:20px;">❤︎ Let's go to Disney! ❤︎</p>
+  </div>
+</div>
+
+<script>
+function openGift() {
+  document.getElementById("modal").style.display = "flex";
+}
+
+function closeGift(e) {
+  // チケット押した時は閉じない
+  if (e && e.target.closest(".modal-content")) return;
+
+  document.getElementById("modal").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>

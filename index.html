@@ -74,6 +74,7 @@ body {
 }
 
 /* 画像 */
+
 .slide {
   position: absolute;
   inset: 0;
@@ -81,8 +82,13 @@ body {
   height: 100%;
   object-fit: cover;
   object-position: center;
+
   opacity: 0;
-  animation: slideShow 12s infinite;
+  transition: opacity 1s ease; /* ←アニメ滑らかに */
+}
+
+.slide.active {
+  opacity: 1;
 }
 
 @keyframes slideShow {
@@ -92,11 +98,6 @@ body {
   40% { opacity: 0; }
   100% { opacity: 0; }
 }
-
-/* スライド順番 */
-.slide:nth-child(1) { animation-delay: 0s; }
-.slide:nth-child(2) { animation-delay: 4s; }
-.slide:nth-child(3) { animation-delay: 8s; }
 
 /* セクション */
 
@@ -291,9 +292,10 @@ font-family: 'Great Vibes', cursive;
 <div class="film-frame">
 
   <div class="slideshow">
-    <img src="https://i.imgur.com/FYu6PbI.jpg" class="slide">
-    <img src="画像2のURL" class="slide">
-    <img src="画像3のURL" class="slide">
+    <img src="https://i.imgur.com/poXoJz3.jpg" class="slide">
+    <img src="https://i.imgur.com/Pa2BThI.jpg" class="slide">
+    <img src="https://i.imgur.com/YhyhHQB.jpg" class="slide">
+
   </div>
 
 </div>
@@ -376,6 +378,21 @@ function closeGift(e) {
 
   document.getElementById("modal").style.display = "none";
 }
+
+// スライドショー初期表示
+let current = 0;
+const slides = document.querySelectorAll(".slide");
+slides[current].classList.add("active");
+
+// スライドショー自動ループ
+setInterval(() => {
+  const next = (current + 1) % slides.length;
+
+  slides[next].classList.add("active");
+  slides[current].classList.remove("active");
+
+  current = next;
+}, 3000);
 
 </script>
 

@@ -16,23 +16,6 @@ body {
   color: #4a3b2c;
 }
 
-/* 背景のビネット部分 */
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-
-  background: linear-gradient(
-    to right,
-    rgba(0,0,0,0.35),
-    transparent 20%,
-    transparent 80%,
-    rgba(0,0,0,0.35)
-  );
-}
-
 /* スライドショー */
 
 /* =========================
@@ -221,7 +204,7 @@ width: 120%; /* ←ここがポイント（100%以上にする） */
 /* プレゼントボタン */
 
 .gift {
-  width: 160px; /* サイズ調整 */
+  width: 180px; /* サイズ調整 */
   cursor: pointer;
   transition: transform 0.2s;
 }
@@ -442,26 +425,42 @@ font-family: 'Great Vibes', cursive;
     <div class="event">
       <div class="time">09:00</div>
       <div class="dot"></div>
-      <div class="content">起床</div>
+      <div class="content">Good morning☀︎<br>
+→ゆったり朝を過ごす</div>
     </div>
 
     <div class="event">
       <div class="time">12:00</div>
       <div class="dot"></div>
-      <div class="content"> AUX BACCHANALES☕️</div>
+      <div class="content"> AUX BACCHANALES☕️
+<br>→おしゃれな写真撮る📷
+<br>→パリ風ブランチ</div>
     </div>
 
     <div class="event highlight">
       <div class="time">15:00</div>
       <div class="dot"></div>
       <div class="content">
-        <img src="https://i.imgur.com/5gBcxjd.png" class="gift" onclick="openGift()">
+        <img src="https://i.imgur.com/XSbmsLO.jpg" class="gift" onclick="openGift()">
       </div>
     </div>
 
+    <div class="event">
+      <div class="time">21:00</div>
+      <div class="dot"></div>
+      <div class="content"> Free🕊️
+<br>→フリータイム確保
+    </div> </div>
+
+    <div class="event">
+      <div class="time">23:00</div>
+      <div class="dot"></div>
+      <div class="content"> </div>
+    </div> </div>
+
   </div>
 </div>
-
+END
 <!-- モーダル -->
 
 <div id="modal" class="modal" onclick="closeGift(event)">

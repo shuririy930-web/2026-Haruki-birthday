@@ -109,15 +109,38 @@ body {
   padding: 10px 10px;
 }
 
+/* 封筒 */
+
+.letter-button-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0;
+}
+
+.letter-btn {
+  width: 250px; /* ←ここでサイズ調整*/
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.letter-btn:active {
+  transform: scale(0.9);
+}
 
 /* カード */
+
 .card {
-  background: rgba(255,255,255,0.7);
-  padding: 30px 20px;
+  background: #f5efe6;
+  padding: 30px 20px; /* ←そのまま（余白は増やさない） */
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  max-width: 400px;
-  width: 100%;
+  box-shadow: 
+    0 10px 30px rgba(0,0,0,0.15),
+    inset 0 0 10px rgba(0,0,0,0.05);
+
+  max-width: 600px; /* ←400px → 600pxに拡張（ここが本命） */
+   width: calc(100% - 40px); /* ←ここ変更（左右に余白作る） */
+  margin: 0 auto;
 }
 
 /* 便箋 */
@@ -164,7 +187,7 @@ body {
 /* プレゼントボタン */
 
 .gift {
-  width: 120px; /* サイズ調整 */
+  width: 160px; /* サイズ調整 */
   cursor: pointer;
   transition: transform 0.2s;
 }
@@ -187,9 +210,19 @@ body {
 }
 
 /* 中身 */
+
 .modal-content {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
   animation: pop 0.5s ease;
+
+flex-direction: column; /* ←これが超重要 */
+  align-items: center;   
+
+padding: 0 20px; /* ←これ追加！！！ */
+  box-sizing: border-box;
+
 }
 
 /* チケット画像 */
@@ -321,21 +354,32 @@ font-family: 'Great Vibes', cursive;
 </div>
 
 <!-- 1画面目 -->
-<div class="section">
-  <div class="card fade">
-    <div class="name">Haruki</div>
+
+<!-- 封筒 -->
+
+<div class="letter-button-area">
+  <img src="https://i.imgur.com/5ooX0qi.jpg" class="letter-btn" onclick="openLetter()">
+</div>
+
+<!-- 便箋モーダル -->
+<div id="letterModal" class="modal" onclick="closeLetter(event)">
+
+  <div class="modal-content">
+
+    <div class="card fade">
+
+<div class="name">Haruki</div>
     <hr class="divider">
 
-    <div class="letter fade delay1">
-      <br>
-      ここに手紙書く<br>
-      <br>
+      <div class="letter fade delay1">
         <br>
-          <br>
-            <br>
-              <br>
+        ここに手紙書く<br>
+        <br>
+        好きな内容にしてOK<br>
+        <br><br><br>
 
-      <div class="signature">Shuri</div>
+        <div class="signature">Shuri</div>
+      </div>
     </div>
 
   </div>
@@ -368,7 +412,7 @@ font-family: 'Great Vibes', cursive;
       <div class="time">15:00</div>
       <div class="dot"></div>
       <div class="content">
-        <img src="https://i.imgur.com/LWGT8lr.jpg" class="gift" onclick="openGift()">
+        <img src="https://i.imgur.com/5gBcxjd.png" class="gift" onclick="openGift()">
       </div>
     </div>
 
@@ -389,6 +433,7 @@ font-family: 'Great Vibes', cursive;
 
 <script>
 function openGift() {
+  vibrateTap();
   document.getElementById("modal").style.display = "flex";
 }
 
@@ -413,6 +458,42 @@ setInterval(() => {
 
   current = next;
 }, 3000);
+
+
+//お手紙の方
+
+function openLetter() {
+  vibrateTap();
+  const modal = document.getElementById("letterModal");
+  const fades = modal.querySelectorAll(".fade");
+
+  // 一旦リセット
+  fades.forEach(el => {
+    el.style.animation = "none";
+  });
+
+  // 強制再描画（これ重要）
+  void modal.offsetWidth;
+
+  // アニメ再適用
+  fades.forEach(el => {
+    el.style.animation = "";
+  });
+
+  modal.style.display = "flex";
+}
+
+function closeLetter(e) {
+  if (e && e.target.closest(".modal-content")) return;
+  document.getElementById("letterModal").style.display = "none";
+}
+
+//ボタン押下時にスマホを振動させる
+function vibrateTap() {
+  if (navigator.vibrate) {
+    navigator.vibrate(50);
+  }
+}
 
 </script>
 

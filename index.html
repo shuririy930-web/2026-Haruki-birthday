@@ -109,6 +109,22 @@ body {
   padding: 10px 10px;
 }
 
+/* happybirthdayの写真 */
+
+.hero-image {
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-image img {
+
+width: 120%; /* ←ここがポイント（100%以上にする） */
+  height: auto; /* ←これで上下は絶対切れない */
+  display: block;
+  margin-left: -10%; /* ←中央に戻す（120%なら-10%） */
+
+}
+
 /* 封筒 */
 
 .letter-button-area {
@@ -353,12 +369,17 @@ font-family: 'Great Vibes', cursive;
 
 </div>
 
+<!-- happy birthdayの写真 -->
+<div class="hero-image">
+  <img src="https://i.imgur.com/ZJOZGp3.jpg">
+</div>
+
 <!-- 1画面目 -->
 
 <!-- 封筒 -->
 
 <div class="letter-button-area">
-  <img src="https://i.imgur.com/5ooX0qi.jpg" class="letter-btn" onclick="openLetter()">
+  <img src="https://i.imgur.com/wBTKTyK.jpg" class="letter-btn" onclick="openLetter()">
 </div>
 
 <!-- 便箋モーダル -->
@@ -372,11 +393,15 @@ font-family: 'Great Vibes', cursive;
     <hr class="divider">
 
       <div class="letter fade delay1">
-        <br>
-        ここに手紙書く<br>
-        <br>
-        好きな内容にしてOK<br>
-        <br><br><br>
+
+　まずは25歳おめでとう。<br>
+　はるきくんと出会ってから、<br>
+毎日が本当に幸せで一瞬でした。<br>
+　自分の人生の選択全てが、<br>
+はるきくんと出会うための<br>
+積み重ねだったんだと感じてます。<br>
+　好きになってくれてありがとう。
+心の底から、ずっと愛してます。<br> <br>
 
         <div class="signature">Shuri</div>
       </div>
@@ -388,7 +413,7 @@ font-family: 'Great Vibes', cursive;
 <!-- スケジュール題名 -->
 
 <div class="title-section">
-  <h2>《Today's  Schedule》</h2>
+  <h2>《Tomorrow's  Schedule》</h2>
 </div>
 
 <!-- スケジュール表 -->

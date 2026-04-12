@@ -242,14 +242,144 @@ padding: 0 20px; /* ←これ追加！！！ */
 
 }
 
+/* ギフトボックスの開いた時  */
+
+.first-gift {
+  width: 250px;
+  border-radius: 12px;
+  opacity: 0;
+  transform: scale(0.9);
+  position: absolute;
+  z-index: 10; 
+display: none; 
+transition: opacity 0.8s ease;
+}
+
+.first-gift.fade-out {
+  opacity: 0;
+　
+}
+
+.first-gift.show {
+  animation: giftIn 1s ease forwards;
+}
+
+@keyframes giftIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+}
+
+/* ライトのところ  */
+
+.light {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  z-index: 10;
+}
+
+.light.show {
+  animation: lightBurst 1.2s ease-out forwards;
+}
+
+@keyframes lightBurst {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1);
+    filter: blur(0px);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(25);
+    filter: blur(10px);
+  }
+}
+
+/* チケット白画面 */
+
+.ticket-wrapper {
+  position: relative;
+  display: inline-block; 
+　z-index: 1;
+}
+
+/* 白い？？？ */
+.mystery {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 250px;
+  height: 100%;
+
+  background: white;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 60px;
+  color: #999;
+
+  z-index: 30;
+
+opacity: 0;
+
+transition: opacity 0.5s ease;
+
+}
+
+/* フェードアウト */
+
+.mystery.fade-out {
+  animation: mysteryFade 2s ease forwards;
+}
+
+@keyframes mysteryFade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 /* チケット画像 */
+
 .ticket {
   width: 250px;
   border-radius: 12px;
+
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity 2s ease; /* ←ここ伸ばす（重要） */
+}
+
+.ticket.show {
+  opacity: 1;
 }
 
 .ticket-link {
   display: inline-block;
+ z-index: 40;
 }
 
 /* プレゼント開くアニメ */
@@ -460,23 +590,98 @@ font-family: 'Great Vibes', cursive;
 
   </div>
 </div>
-END
+<br>END 
 <!-- モーダル -->
 
 <div id="modal" class="modal" onclick="closeGift(event)">
 
   <div class="modal-content">
+
+<img src="https://i.imgur.com/lg18Oaf.jpg" class="first-gift">
+
+  <div class="ticket-wrapper">
+    <div class="light"></div>
+    <!-- 白い？？？ -->
+    <div class="mystery">
+      
+    </div>
+
+    <!-- 本物のチケット -->
     <a href="グループ参加のURL" class="ticket-link" target="_blank">
-  <img src="https://i.imgur.com/G70k6VP.jpg" class="ticket">
-</a>
-    <p style="color:white; margin-top:20px;">❤︎ Let's go to Disney! ❤︎</p>
+      <img src="https://i.imgur.com/G70k6VP.jpg" class="ticket">
+    </a>
+
   </div>
+
+  <p style="color:white; margin-top:20px;"><!--❤︎ Let's go to Disney! ❤︎--></p>
+</div>
 </div>
 
 <script>
+
 function openGift() {
   vibrateTap();
-  document.getElementById("modal").style.display = "flex";
+
+  const modal = document.getElementById("modal");
+  modal.style.display = "flex";
+
+  const firstGift = document.querySelector(".first-gift");
+  const light = document.querySelector(".light");
+  const mystery = document.querySelector(".mystery");
+  const ticket = document.querySelector(".ticket");
+
+  // 🔥完全リセット（超重要）
+  firstGift.style.display = "none";
+  firstGift.classList.remove("show");
+
+  light.classList.remove("show");
+
+  mystery.classList.remove("fade-out");
+  mystery.style.opacity = "0";
+
+  ticket.classList.remove("show");
+
+  // 強制再描画
+  void modal.offsetWidth;
+
+  // ② ギフト出現
+  setTimeout(() => {
+    firstGift.style.display = "block";
+    firstGift.classList.add("show");
+  }, 100);
+
+// ③ 光
+setTimeout(() => {
+  light.classList.add("show");
+}, 900);
+
+// ⭐ ギフト先にフェードアウト
+setTimeout(() => {
+  firstGift.classList.add("fade-out");
+}, 1200);
+
+// ⭐ 完全に消す（透明にしきる）
+setTimeout(() => {
+  firstGift.style.display = "none";
+}, 1600);
+
+
+
+// ④ 白表示（この時点でギフトは完全に消えてる）
+setTimeout(() => {
+  mystery.style.opacity = "1";
+}, 1500);
+
+// ⑤ 白フェードアウト＋チケット
+
+setTimeout(() => {
+  mystery.classList.add("fade-out");
+}, 2100);
+
+setTimeout(() => {
+  ticket.classList.add("show");
+}, 2300);
+
 }
 
 function closeGift(e) {

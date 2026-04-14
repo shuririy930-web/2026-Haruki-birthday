@@ -253,10 +253,12 @@ padding: 0 20px; /* ←これ追加！！！ */
   z-index: 10; 
 display: none; 
 transition: opacity 0.8s ease;
+pointer-events: none;
 }
 
 .first-gift.fade-out {
   opacity: 0;
+  
 　
 }
 
@@ -372,6 +374,7 @@ pointer-events: none;
   opacity: 0;
   transform: scale(1);
   transition: opacity 2s ease; /* ←ここ伸ばす（重要） */
+pointer-events: auto;
 }
 
 .ticket.show {
@@ -381,6 +384,7 @@ pointer-events: none;
 .ticket-link {
   display: inline-block;
  z-index: 40;
+z-index: 50;
 }
 
 /* プレゼント開くアニメ */

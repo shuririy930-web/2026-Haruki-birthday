@@ -690,10 +690,10 @@ setTimeout(() => {
 }
 
 function closeGift(e) {
-  // チケット押した時は閉じない
-  if (e && e.target.closest(".modal-content")) return;
-
-  document.getElementById("modal").style.display = "none";
+  // 背景（黒い部分）だけで閉じる
+  if (e.target.id === "modal") {
+    document.getElementById("modal").style.display = "none";
+  }
 }
 
 // スライドショー初期表示

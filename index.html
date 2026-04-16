@@ -234,10 +234,12 @@ width: 120%; /* ←ここがポイント（100%以上にする） */
   width: 100%;
   animation: pop 0.5s ease;
 
-flex-direction: column; /* ←これが超重要 */
+  flex-direction: column; 
   align-items: center;   
+  
+  position: relative;
 
-padding: 0 20px; /* ←これ追加！！！ */
+  padding: 0 20px; 
   box-sizing: border-box;
 
 }
@@ -673,12 +675,12 @@ setTimeout(() => {
   light.classList.add("show");
 }, 900);
 
-// ⭐ ギフト先にフェードアウト
+// ギフト先にフェードアウト
 setTimeout(() => {
   firstGift.classList.add("fade-out");
 }, 1200);
 
-// ⭐ 完全に消す（透明にしきる）
+// 完全に消す（透明にしきる）
 setTimeout(() => {
   firstGift.style.display = "none";
 }, 1600);

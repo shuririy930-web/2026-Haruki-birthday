@@ -247,14 +247,18 @@ padding: 0 20px; /* ←これ追加！！！ */
 .first-gift {
   width: 250px;
   border-radius: 12px;
-  opacity: 0;
-  top: 40%;
-  transform: scale(0.9);
+
   position: absolute;
-  z-index: 10; 
-display: none; 
-transition: opacity 0.8s ease;
-pointer-events: none;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+
+  opacity: 0;
+  z-index: 10;
+  display: none;
+
+  transition: opacity 0.8s ease;
+  pointer-events: none;
 }
 
 .first-gift.fade-out {
@@ -270,12 +274,12 @@ pointer-events: none;
 @keyframes giftIn {
   0% {
     opacity: 0;
-    transform: scale(0.7);
+    transform: translate(-50%, -50%) scale(0.7);
     filter: blur(6px);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: translate(-50%, -50%) scale(1);
     filter: blur(0px);
   }
 }
